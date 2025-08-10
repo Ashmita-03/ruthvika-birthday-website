@@ -1,0 +1,516 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(340, 82%, 52%);
+  --muted: hsl(330, 100%, 97%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(340, 82%, 52%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(340, 82%, 52%);
+  --border: hsl(330, 30%, 90%);
+  --input: hsl(330, 30%, 90%);
+  --primary: hsl(340, 82%, 52%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(330, 100%, 97%);
+  --secondary-foreground: hsl(340, 82%, 52%);
+  --accent: hsl(330, 100%, 97%);
+  --accent-foreground: hsl(340, 82%, 52%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(340, 82%, 52%);
+  --radius: 0.75rem;
+  
+  /* Custom birthday theme colors */
+  --pastel-pink: hsl(351, 100%, 86%);
+  --soft-pink: hsl(350, 100%, 88%);
+  --hot-pink: hsl(340, 82%, 52%);
+  --misty-rose: hsl(351, 100%, 94%);
+  --warm-white: hsl(340, 100%, 98%);
+}
+
+.dark {
+  --background: hsl(340, 10%, 5%);
+  --foreground: hsl(330, 100%, 97%);
+  --muted: hsl(340, 10%, 15%);
+  --muted-foreground: hsl(340, 5%, 65%);
+  --popover: hsl(340, 10%, 5%);
+  --popover-foreground: hsl(330, 100%, 97%);
+  --card: hsl(340, 10%, 5%);
+  --card-foreground: hsl(330, 100%, 97%);
+  --border: hsl(340, 10%, 15%);
+  --input: hsl(340, 10%, 15%);
+  --primary: hsl(340, 82%, 52%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(340, 10%, 15%);
+  --secondary-foreground: hsl(330, 100%, 97%);
+  --accent: hsl(340, 10%, 15%);
+  --accent-foreground: hsl(330, 100%, 97%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(340, 10%, 85%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-dancing {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--misty-rose) 0%, var(--warm-white) 50%, var(--pastel-pink) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-gradient {
+    background: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, var(--warm-white) 100%);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, var(--hot-pink), var(--pastel-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .hover-lift {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+  }
+  
+  .spotify-embed {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  /* Media carousel specific styles */
+  .media-carousel-container {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .media-carousel-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .media-carousel-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .media-carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .media-carousel-item:hover .media-carousel-overlay {
+    opacity: 1;
+  }
+
+  /* Horizontal flowing heart elements - varying sizes */
+  .flowing-element {
+    position: absolute;
+    opacity: 0;
+    animation: flowHorizontal 6s linear infinite;
+  }
+
+  .flowing-element.reverse {
+    animation: flowHorizontalReverse 6s linear infinite;
+  }
+
+  .flowing-element::before {
+    content: '♥';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--hot-pink), var(--pastel-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    line-height: 1;
+    filter: drop-shadow(0 0 3px rgba(255, 182, 193, 0.6));
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  /* Size variations for flowing hearts */
+  .flowing-element:nth-child(3n) {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .flowing-element:nth-child(3n)::before {
+    font-size: 16px;
+  }
+
+  .flowing-element:nth-child(3n+1) {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .flowing-element:nth-child(3n+1)::before {
+    font-size: 20px;
+  }
+
+  .flowing-element:nth-child(3n+2) {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .flowing-element:nth-child(3n+2)::before {
+    font-size: 24px;
+  }
+
+  @keyframes flowHorizontal {
+    0% {
+      transform: translateX(-100px) scale(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100px)) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes flowHorizontalReverse {
+    0% {
+      transform: translateX(calc(100vw + 100px)) scale(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(-100px) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+
+  /* Mobile-friendly adjustments - maintain varying sizes but smaller */
+  @media (max-width: 768px) {
+    .flowing-element:nth-child(3n) {
+      width: 14px;
+      height: 14px;
+    }
+    .flowing-element:nth-child(3n)::before {
+      font-size: 14px;
+    }
+    .flowing-element:nth-child(3n+1) {
+      width: 16px;
+      height: 16px;
+    }
+    .flowing-element:nth-child(3n+1)::before {
+      font-size: 16px;
+    }
+    .flowing-element:nth-child(3n+2) {
+      width: 18px;
+      height: 18px;
+    }
+    .flowing-element:nth-child(3n+2)::before {
+      font-size: 18px;
+    }
+    
+    .blooming-heart:nth-child(4n) {
+      width: 14px;
+      height: 14px;
+    }
+    .blooming-heart:nth-child(4n)::before {
+      font-size: 14px;
+    }
+    .blooming-heart:nth-child(4n+1) {
+      width: 16px;
+      height: 16px;
+    }
+    .blooming-heart:nth-child(4n+1)::before {
+      font-size: 16px;
+    }
+    .blooming-heart:nth-child(4n+2) {
+      width: 18px;
+      height: 18px;
+    }
+    .blooming-heart:nth-child(4n+2)::before {
+      font-size: 18px;
+    }
+    .blooming-heart:nth-child(4n+3) {
+      width: 20px;
+      height: 20px;
+    }
+    .blooming-heart:nth-child(4n+3)::before {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .flowing-element:nth-child(3n) {
+      width: 12px;
+      height: 12px;
+    }
+    .flowing-element:nth-child(3n)::before {
+      font-size: 12px;
+    }
+    .flowing-element:nth-child(3n+1) {
+      width: 14px;
+      height: 14px;
+    }
+    .flowing-element:nth-child(3n+1)::before {
+      font-size: 14px;
+    }
+    .flowing-element:nth-child(3n+2) {
+      width: 16px;
+      height: 16px;
+    }
+    .flowing-element:nth-child(3n+2)::before {
+      font-size: 16px;
+    }
+    
+    .blooming-heart:nth-child(4n) {
+      width: 12px;
+      height: 12px;
+    }
+    .blooming-heart:nth-child(4n)::before {
+      font-size: 12px;
+    }
+    .blooming-heart:nth-child(4n+1) {
+      width: 14px;
+      height: 14px;
+    }
+    .blooming-heart:nth-child(4n+1)::before {
+      font-size: 14px;
+    }
+    .blooming-heart:nth-child(4n+2) {
+      width: 16px;
+      height: 16px;
+    }
+    .blooming-heart:nth-child(4n+2)::before {
+      font-size: 16px;
+    }
+    .blooming-heart:nth-child(4n+3) {
+      width: 18px;
+      height: 18px;
+    }
+    .blooming-heart:nth-child(4n+3)::before {
+      font-size: 18px;
+    }
+  }
+
+  /* Blooming hearts - varying sizes */
+  .blooming-heart {
+    position: absolute;
+    opacity: 0;
+    animation: bloom 4s ease-out infinite;
+  }
+
+  .blooming-heart::before {
+    content: '♥';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--hot-pink), var(--pastel-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    line-height: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.8));
+  }
+
+  /* Size variations for blooming hearts */
+  .blooming-heart:nth-child(4n) {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .blooming-heart:nth-child(4n)::before {
+    font-size: 18px;
+  }
+
+  .blooming-heart:nth-child(4n+1) {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .blooming-heart:nth-child(4n+1)::before {
+    font-size: 22px;
+  }
+
+  .blooming-heart:nth-child(4n+2) {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .blooming-heart:nth-child(4n+2)::before {
+    font-size: 26px;
+  }
+
+  .blooming-heart:nth-child(4n+3) {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .blooming-heart:nth-child(4n+3)::before {
+    font-size: 30px;
+  }
+
+  @keyframes bloom {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.9;
+    }
+    80% {
+      transform: scale(2.5);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  .media-lightbox-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  /* Enhanced carousel drag states */
+  .cursor-grabbing * {
+    cursor: grabbing !important;
+  }
+
+  .cursor-grab * {
+    cursor: grab !important;
+  }
+
+  /* Smooth carousel transitions */
+  .media-carousel-track {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .media-carousel-track.dragging {
+    transition: none;
+  }
+
+  /* Prevent image dragging */
+  .media-carousel-item img,
+  .media-carousel-item video {
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    transition: transform 0.3s ease;
+  }
+
+  .media-carousel-item img:hover,
+  .media-carousel-item video:hover {
+    transform: scale(1.02);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+  
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  @keyframes slide-down {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
