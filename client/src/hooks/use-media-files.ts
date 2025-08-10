@@ -67,6 +67,7 @@ export function useMediaFiles() {
             const isVideo = filename.endsWith('.mp4');
             const folder = isVideo ? 'videos' : 'images';
             const friendFolder = directoryMapping[friendName] || friendName.toLowerCase();
+            // For now, use local media files in production until object storage is populated
             const src = `/media/${folder}/${friendFolder}/${filename}`;
             
             // Check if file exists
